@@ -38,7 +38,7 @@ def fct2(t,p) :
 
 #Generated function using gplearn library for symbolique regression
 def estimatedSpeed(X0,X1) : 
-   result = np.subtract(np.subtract(np.subtract(np.add(divide(abs(divide(0.654, X1)), sqrt(X0)), np.subtract(abs(divide(sqrt(abs(np.subtract(np.add(divide(np.subtract(np.add(X1, 0.072), abs(np.subtract(X0, -0.464))), divide(np.subtract(X0, X0), sqrt(X0))), np.subtract(abs(divide(-0.943, 0.001)), X0)), np.subtract(np.add(divide(abs(np.add(divide(X1, -0.052), np.add(np.add(X0, np.add(X0, 0.655)), X0))), log(np.subtract(np.add(X0, sqrt(X0)), divide(X0, X0)))), divide(0.654, X1)), abs(X1))))), np.multiply(abs(-0.004), log(X0)))), np.multiply(log(X1), sqrt(0.513)))), np.subtract(abs(X0), abs(np.subtract(np.add(divide(divide(0.654, X1), np.subtract(np.add(divide(np.add(X1, X1), divide(X0, sqrt(log(X0)))),np.subtract(abs(divide(-0.943, 0.001)), abs(sqrt(abs(np.multiply(np.add(-0.450, X1), np.subtract(np.add(X0, X0), np.subtract(abs(divide(-0.943, 0.001)), np.multiply(log(X1), log(X1)))))))))), np.subtract(abs(X0), abs(0.777)))), np.subtract(abs(divide(-0.943, 0.001)), abs(sqrt(abs(np.multiply(np.add(divide(abs(divide(0.654, X1)), np.subtract(np.multiply(divide(log(0.452), divide(-0.283, X0)), 0.788), divide(sqrt(abs(log(abs(np.subtract(np.multiply(X1, 0.122), divide(0.283, X0)))))), log(np.multiply(abs(X1), np.subtract(X0, X1)))))), np.subtract(abs(divide(-0.943, 0.001)), np.multiply(log(X1), np.add(np.multiply(np.subtract(np.add(X0, X0), np.subtract(abs(divide(-0.943, 0.001)), np.multiply(np.subtract(np.add(X0, X0), np.subtract(abs(divide(-0.943, 0.001)), np.multiply(0.654, sqrt(0.513)))), sqrt(0.218)))), sqrt(0.218)), X0)))), abs(log(np.add(X0, X0))))))))), np.subtract(np.add(X0, 0.655), abs(sqrt(np.add(X1, X0)))))))), X0), divide(np.add(X1, X1), log(0.688)))
+   result =np.add(np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.subtract(X1, 888.274), np.sqrt(X0)), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))))), np.sqrt(abs(np.divide(np.add(np.subtract(np.divide(np.divide(np.multiply(620.558, X1), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0))), np.divide(np.add(np.multiply(X0, X0), np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))), np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, np.sqrt(np.divide(332.484, X0))))), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1,274.722)), np.divide(np.sqrt(np.divide(X0, X0)), np.subtract(332.484, X0)))), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.add(X0, 950.501)), np.divide(np.subtract(np.add(549.524,X1), np.sqrt(abs(np.divide(np.add(np.subtract(332.484, X0), np.sqrt(X1)), np.add(X0, 950.501))))), np.divide(np.sqrt(84.206), np.divide(np.divide(X0, X0), X0)))))))), np.divide(np.sqrt(np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(np.subtract(np.subtract(np.sqrt(84.206), X0), X0), np.subtract(X1, 294.264))))))))
    return result
 
 #Protected sqrt function 
@@ -143,12 +143,12 @@ def main() :
                        color='green', alpha=0.5)
 
     points = ax.scatter(temperatures, pressures, speeds)
-    plt.savefig('test7.png')
+    plt.savefig('test9Best.png')
     plt.show()
     
     print "End of the ploting........" 
-    
     '''
+    
     #Chi-Squart Statistic test on the generated model
     experimentData = array.array('d')
     for d in data : 
@@ -156,9 +156,24 @@ def main() :
 
     print "Chi-Square Value is = : ", scs.chisquare(speeds,experimentData,axis=0) 
     
-    
+    #Computation of infinite Norm 
 
+    #Norm L1
+    s = 0  
+    for i in range(len(experimentData)) : 
+        s = s + (abs(experimentData[i]-speeds[i]))
+    print "The norm L1 = ", s/len(experimentData)
 
+    #Norm L2
+    v = []
+    S = 0  
+    for i in range(len(experimentData)) : 
+        S = S + (abs(experimentData[i]-speeds[i]))**2
+        v.append(experimentData[i]-speeds[i])
+    print "The norm L2 = ", np.sqrt(S)
+
+    #Norm L-infinite 
+    print "The norm L-Infinite = ",np.linalg.norm(v,np.inf)
 
 
 

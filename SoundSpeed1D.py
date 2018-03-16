@@ -45,7 +45,9 @@ def log(x) :
 #Customized gplearn function 
 def _protected_exp(x1):
         with np.errstate(divide='ignore', invalid='ignore'):
-            return np.where(np.abs(x1) > 0.001, np.exp(x1), 1.)
+            a = np.where(np.abs(x1) > 0.001, np.exp(x1), 1.)
+            a[~np.isfinite(a)] = 0
+            return a
 
 #Main function 
 def main() : 
