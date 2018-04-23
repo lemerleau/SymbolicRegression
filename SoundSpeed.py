@@ -17,6 +17,7 @@ import pydotplus
 import scipy.stats as scs
 import array
 from gplearn.genetic import SymbolicRegressor, check_random_state
+import csv
 #from sage.all import *
 #from sage.plot.plot3d.plot3d import axes
 
@@ -37,8 +38,8 @@ def fct2(t,p) :
     return np.sqrt(abs(result))
 
 #Generated function using gplearn library for symbolique regression
-def estimatedSpeed(X0,X1) : 
-   result =np.add(np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.subtract(X1, 888.274), np.sqrt(X0)), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))))), np.sqrt(abs(np.divide(np.add(np.subtract(np.divide(np.divide(np.multiply(620.558, X1), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0))), np.divide(np.add(np.multiply(X0, X0), np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))), np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, np.sqrt(np.divide(332.484, X0))))), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1,274.722)), np.divide(np.sqrt(np.divide(X0, X0)), np.subtract(332.484, X0)))), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.add(X0, 950.501)), np.divide(np.subtract(np.add(549.524,X1), np.sqrt(abs(np.divide(np.add(np.subtract(332.484, X0), np.sqrt(X1)), np.add(X0, 950.501))))), np.divide(np.sqrt(84.206), np.divide(np.divide(X0, X0), X0)))))))), np.divide(np.sqrt(np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(np.subtract(np.subtract(np.sqrt(84.206), X0), X0), np.subtract(X1, 294.264))))))))
+def estimatedSpeed(T,p) : 
+   result=np.add(np.add(divide(np.add(np.add(p, 14), np.negative(-10)), T), np.add(np.subtract(np.subtract(np.add(np.add(sqrt(np.multiply(p, T)), np.add(np.subtract(np.add(np.add(p, sqrt(np.add(np.add(np.add(np.multiply(14, 68), np.add(p, sqrt(p))), np.add(np.subtract(np.multiply(14, 68), divide(T, 14)), np.subtract(np.multiply(14, 68), divide(T, 14)))), p))), sqrt(np.add(np.add(np.add(p, sqrt(np.multiply(p, T))), np.add(np.subtract(np.multiply(-10, 68), divide(T, 14)), p)), np.add(p, np.add(np.subtract(p, divide(T, 14)), p))))), divide(T, np.subtract(divide(np.subtract(np.multiply(14, 68), divide(T, 14)), T), divide(T, np.add(np.subtract(T, divide(T, 14)), p))))), p)), np.add(p, np.multiply(divide(sqrt(np.multiply(p, np.multiply(p, np.subtract(68, divide(T, np.subtract(divide(np.multiply(14, 68), T), divide(T, T))))))), np.add(np.subtract(np.multiply(14, 68), divide(T, 14)), np.add(np.subtract(np.multiply(-10, 68), divide(T, 14)), p))), 68))), sqrt(T)), np.negative(-57)), p)), np.multiply(14, np.multiply(divide(sqrt(np.multiply(np.multiply(14, 68), 68)), T), 83)))
    return result
 
 #Protected sqrt function 
@@ -48,6 +49,7 @@ def sqrt(x) :
 #Protected divide function 
 def divide(a,b) : 
     if b==0 : 
+        print a , b 
         return 1 
     return np.divide(a,b)
 
@@ -99,7 +101,16 @@ def main() :
         pressures.append(d[1])
         speeds.append(d[2])
     print len(speeds)
+    """
+     #Save my data in a csv file 
+    with open('data2D.csv', 'w') as csvfile:
+        fieldnames = ['T', 'p','S']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
+        writer.writeheader()
+        for d in data : 
+            writer.writerow({'T': d[0], 'p': d[1],'S':d[2]})
+    """
     # Training samples
     print len(temperatures), len(pressures)
     X_train = np.array([temperatures,pressures]).T
@@ -124,27 +135,29 @@ def main() :
     #print the function tree generated
     #print mygp._program
 
-
+   
     '''
     Ploting the 3D graph of the estimated function and  the scatter point of the observed value of the speed of sound
     '''
     '''
     print "Start ploting the graph ........."
     #Approximated function to plot
-    X0 = np.linspace(200,420,301)
-    X1 = np.linspace(0.1,100,301)
-    X0, X1 = np.meshgrid(X0, X1)
+    T = np.linspace(200,420,301)
+    p = np.linspace(0.1,100,301)
+    T, p = np.meshgrid(T, p)
     #Function 2 y_truth =np.subtract(np.add(abs(np.subtract(np.add(abs(np.add(abs(np.add(np.divide(np.add(X0, np.subtract(abs(np.subtract(np.add(abs(np.subtract(np.subtract(X1, X0), np.divide(0.474, X1))), abs(X0)), np.subtract(np.subtract(X1, X0), np.subtract(abs(abs(abs(np.divide(np.add(abs(X1), abs(0.089)), np.subtract(np.divide(-0.445, -0.983), np.divide(X0, X1)))))), np.sqrt(abs(np.subtract(0.079, X1))))))), abs(np.multiply(np.sqrt(np.divide(X0, X1)), np.divide(np.sqrt(X1), np.multiply(0.022, 0.516)))))), 0.303), -0.612)), -0.612)), np.sqrt(abs(np.add(np.multiply(np.multiply(np.add(-0.173, 0.526), np.multiply(0.837, X0)), np.divide(np.divide(0.708, X1), X1)), np.multiply(np.sqrt(abs(X1)), np.divide(np.subtract(-0.189, X0), np.add(0.974, -0.235))))))), np.divide(np.subtract(0.201, 0.272), np.divide(np.multiply(np.divide(0.862, X0), np.subtract(np.multiply(0.837, X0), np.add(X0, X0))), abs(np.multiply(np.divide(np.add(X0, np.subtract(abs(abs(np.subtract(np.add(np.sqrt(0.792), abs(X0)), np.subtract(np.divide(abs(-0.768), np.divide(np.multiply(np.divide(0.862, X0), np.subtract(np.multiply(0.837, X0), np.add(X0, X0))), np.subtract(np.divide(X1, np.subtract(np.divide(np.subtract(X0, np.multiply(abs(np.subtract(np.sqrt(abs(np.subtract(0.079, X1))), np.multiply(0.837, X0))), abs(np.multiply(np.sqrt(np.divide(X0, X1)), np.divide(np.sqrt(X1), np.multiply(0.022, 0.516)))))), 0.303), X1)), np.add(np.subtract(X0, -0.893), np.subtract(X0, -0.893))))), abs(X0))))), np.divide(X0, X1))), 0.303), -0.612)))))), abs(np.add(np.subtract(np.subtract(X1, X0), np.divide(abs(X1), abs(np.multiply(np.sqrt(abs(np.subtract(np.subtract(X1, X0), np.subtract(abs(abs(abs(np.divide(np.add(abs(X1), abs(0.089)), np.subtract(np.divide(-0.445, -0.983), np.divide(X0, X1)))))), np.sqrt(abs(np.subtract(0.079, X1))))))), np.divide(np.sqrt(X1), np.multiply(np.add(X0, np.subtract(abs(np.subtract(np.add(np.sqrt(0.792), abs(X0)), np.subtract(np.divide(abs(-0.768), np.divide(np.multiply(np.divide(0.862, np.add(abs(np.subtract(np.subtract(X1, X0), np.divide(0.474, X1))), abs(np.subtract(X1, X0)))), np.subtract(np.multiply(0.837, X0), np.add(X0, X0))), np.subtract(np.divide(X1, np.subtract(np.divide(np.subtract(X0, np.multiply(abs(np.multiply(np.divide(np.subtract(np.multiply(0.837, X0), np.add(X0, X0)), 0.303), -0.612)), abs(np.multiply(np.sqrt(np.multiply(0.022, 0.516)), np.divide(np.sqrt(X1), np.subtract(X1, X0)))))), 0.303), X1)), np.add(abs(np.subtract(X1, X0)), abs(X0))))), np.add(X1, X1)))), np.divide(X0, X1))), 0.516)))))), abs(abs(X0))))), np.divide(np.subtract(0.201, 0.272), np.divide(np.multiply(np.divide(0.862, np.add(X1, X0)), np.subtract(np.multiply(0.837, X0), np.add(X0, X0))), abs(abs(np.subtract(np.add(abs(np.subtract(X0, np.add(X1, X1))), abs(X0)), np.subtract(np.subtract(X1, X0), np.add(X1, np.sqrt(X1)))))))))
-    y_truth=np.add(np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.subtract(X1, 888.274), np.sqrt(X0)), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))))), np.sqrt(abs(np.divide(np.add(np.subtract(np.divide(np.divide(np.multiply(620.558, X1), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0))), np.divide(np.add(np.multiply(X0, X0), np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))), np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, np.sqrt(np.divide(332.484, X0))))), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1,274.722)), np.divide(np.sqrt(np.divide(X0, X0)), np.subtract(332.484, X0)))), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.add(X0, 950.501)), np.divide(np.subtract(np.add(549.524,X1), np.sqrt(abs(np.divide(np.add(np.subtract(332.484, X0), np.sqrt(X1)), np.add(X0, 950.501))))), np.divide(np.sqrt(84.206), np.divide(np.divide(X0, X0), X0)))))))), np.divide(np.sqrt(np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(np.subtract(np.subtract(np.sqrt(84.206), X0), X0), np.subtract(X1, 294.264))))))))
+    #y_truth=np.add(np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.subtract(X1, 888.274), np.sqrt(X0)), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))))), np.sqrt(abs(np.divide(np.add(np.subtract(np.divide(np.divide(np.multiply(620.558, X1), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, X0))), np.divide(np.add(np.multiply(X0, X0), np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(332.484, X0)))), np.sqrt(abs(np.subtract(np.multiply(np.multiply(np.subtract(np.divide(np.divide(np.multiply(X1, X0), np.divide(X1, 274.722)), np.divide(np.sqrt(X0), np.subtract(332.484, np.sqrt(np.divide(332.484, X0))))), np.divide(np.divide(np.multiply(X1, X0), np.divide(X1,274.722)), np.divide(np.sqrt(np.divide(X0, X0)), np.subtract(332.484, X0)))), np.divide(X0, X0)), np.add(np.multiply(17.971, X1), 558.793)), np.divide(np.divide(np.multiply(X1, X0), np.add(X0, 950.501)), np.divide(np.subtract(np.add(549.524,X1), np.sqrt(abs(np.divide(np.add(np.subtract(332.484, X0), np.sqrt(X1)), np.add(X0, 950.501))))), np.divide(np.sqrt(84.206), np.divide(np.divide(X0, X0), X0)))))))), np.divide(np.sqrt(np.divide(X0, X0)), np.divide(np.sqrt(X0), np.subtract(np.subtract(np.subtract(np.sqrt(84.206), X0), X0), np.subtract(X1, 294.264))))))))
+    y_truth = 2650.85434420177 + 1.61086384208054*p + 0.00172042966164121*T**2 + 0.000105111614562578*p*T**2 + 1.02519096201154e-6*T*p**3 - 6.38613033845599*T - 8.60031136692733e-7*T**2*p**2
     ax = plt.figure().gca(projection='3d')
     ax.set_xlim(200, 420)
     ax.set_ylim(0, 100)
-    surf = ax.plot_surface(X0, X1, y_truth, rstride=1, cstride=1,
+    surf = ax.plot_surface(T, p, y_truth, rstride=1, cstride=1,
                        color='green', alpha=0.5)
 
     points = ax.scatter(temperatures, pressures, speeds)
-    plt.savefig('test9Best.png')
-    plt.show()
+    plt.savefig('test14Best.png')
+    #plt.show()
+    
     
     print "End of the ploting........" 
     '''
